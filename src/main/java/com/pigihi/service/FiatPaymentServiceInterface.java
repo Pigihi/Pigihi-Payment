@@ -4,6 +4,8 @@
 package com.pigihi.service;
 
 /**
+ * Interface for fiat payment service
+ * 
  * @author Ashish Sam T George
  *
  */
