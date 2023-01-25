@@ -20,6 +20,8 @@ import com.paytm.pg.merchant.PaytmChecksum;
 
 
 /**
+ * Implementation class for fiat payment service interface
+ * 
  * @author Ashish Sam T George
  *
  */
@@ -34,6 +36,16 @@ public class PaytmPaymentService implements FiatPaymentServiceInterface {
 	private String MERCHANT_ID = "SApWAl73540535701479";
 	private String MERCHANT_KEY = "37MuHFVCCXnpK1ER";
 	
+	/**
+	 * Make payment through the payment gateway
+	 * 
+	 * @param orderId
+	 * @param amount
+	 * @return JSON string
+	 * 
+	 * @author Ashish Sam T George
+	 * 
+	 */
 	@Override
 	public String makePayment(String orderId, String amount) throws Exception {
 		System.out.println("------------Started the Initiate Transaction Process----------------");
