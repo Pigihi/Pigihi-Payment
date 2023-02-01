@@ -97,7 +97,7 @@ public class PaytmPaymentService implements FiatPaymentServiceInterface {
 		System.out.println("Paytm POST BODY: " + json);
 		
 //		String post_data = paytmParams.toString();
-		String post_data = json.getAsString();
+		String post_data = json.toString();
 		
 		String stageUrl = "https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?";
 		String prodUrl = "https://securegw.paytm.in/theia/api/v1/initiateTransaction?";

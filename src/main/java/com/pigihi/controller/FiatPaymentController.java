@@ -8,10 +8,14 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.pigihi.model.PaymentModel;
 import com.pigihi.service.FiatPaymentServiceInterface;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,15 +47,18 @@ public class FiatPaymentController {
 	 * 
 	 */
 	@PostMapping("/makePayment")
-	public String makePayment() throws Exception {
+	public String makePayment(@RequestBody PaymentModel paymentModel) throws Exception {
 		//TODO Accept orderId and amount
-		String orderId = "";
-		String amount = "";
+		String orderId = paymentModel.getOrderId();
+		String amount = paymentModel.getAmount();
 		String response = paytmPaymentService.makePayment(orderId, amount);
 		Gson gson = new Gson();
-		JsonElement jsonElement = gson.toJsonTree(response);
-		jsonElement.getAsJsonObject().addProperty("orderId", orderId);
-		return gson.toJson(jsonElement);
+
+//		JsonElement jsonElement = gson.toJsonTree(response);
+		JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+		jsonObject.addProperty("orderId", orderId);
+		System.out.println("Upto Here: " + jsonObject);
+		return gson.toJson(jsonObject);
 	}
 	
 	/**
