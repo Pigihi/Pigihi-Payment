@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  payment-db:
+    container_name: payment-db
+    image: 'mongo'
+    restart: always
+    volumes:
+      - mongo-volume:/data/db
+      #- ./mongo-volume:/data/db
+    ports:
+      - 27020:27017
+
+  payment-service:
+    container_name: payment-service-v0.1
+    image: payment-service-v0.1-image
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - 8093:8080
+    restart: always
+    depends_on:
+      - payment-db
+
+volumes:
+  mongo-volume:
+
+networks:
+  default:
+    external:
+      name: pigihi-network
