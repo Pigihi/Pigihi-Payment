@@ -1,10 +1,22 @@
+eureka_hostname: service-registry
+#mongodb_hostname: payment-db
+
+# Production environment
+#mongodb_database_name: paymentDB
+
+# Development environment
+#mongodb_database_name: devPaymentDB
+
+# Test environment
+#mongodb_database_name: testPaymentDB
+
 # Eureka properties
 eureka:
   client:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://service-registry:8761/eureka
+      defaultZone: http://${eureka_hostname}:8761/eureka
   instance:
     hostname: localhost
 
@@ -16,6 +28,8 @@ server:
 spring:
   application:
     name: PAYMENT-SERVICE
+  config:
+    import: optional:settings.yml
 # MongoDB properties
 #  data:
 #    mongodb:
