@@ -1,15 +1,15 @@
 version: "3.3"
 
 services:
-  payment-db:
-    container_name: payment-db
-    image: 'mongo'
-    restart: always
-    volumes:
-      - mongo-volume:/data/db
-      #- ./mongo-volume:/data/db
-    ports:
-      - 27020:27017
+#  payment-db:
+#    container_name: payment-db
+#    image: 'mongo'
+#    restart: always
+#    volumes:
+#      - mongo-volume:/data/db
+#      #- ./mongo-volume:/data/db
+#    ports:
+#      - 27020:27017
 
   payment-service:
     container_name: payment-service-v0.1
@@ -18,10 +18,10 @@ services:
     volumes:
       - .:/app
     ports:
-      - 8093:8080
+      - 8093:8093
     restart: always
-    depends_on:
-      - payment-db
+#    depends_on:
+#      - payment-db
 
 volumes:
   mongo-volume:
